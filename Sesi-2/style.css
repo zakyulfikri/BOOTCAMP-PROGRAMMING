@@ -1,0 +1,345 @@
+:root {
+            --primary-color: #2563eb; /* Biru Modern */
+            --primary-hover: #1d4ed8;
+            --text-main: #1f2937; /* Dark Gray */
+            --text-muted: #4b5563; /* Medium Gray */
+            --bg-body: #f9fafb; /* Light Gray background */
+            --bg-card: #ffffff;
+            --border-color: #e5e7eb;
+            --border-dark: #111827;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', Arial, Helvetica, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px 10px;
+        }
+
+        /* Container Utama */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: var(--bg-card);
+            border: 2px solid var(--border-dark); /* Sentuhan gaya neo-brutalisme minimalis modern */
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Section 1: Navigation */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            border-bottom: 2px solid var(--border-dark);
+            background: linear-gradient(90deg, #ff0000, #111827);
+        }
+
+        .brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--border-dark);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--bg-card);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Section 2: Header (Hero Grid) */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 60px 40px;
+            align-items: center;
+            border-bottom: 2px solid var(--border-dark);
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .hero-content h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            color: var(--border-dark);
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        .hero-btn {
+            align-self: flex-start;
+            background-color: var(--border-dark);
+            color: #ffffff;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .hero-btn:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Responsivitas Gambar */
+        .hero-image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border: 2px solid var(--border-dark);
+            border-radius: var(--radius-md);
+            object-fit: cover;
+            box-shadow: 6px 6px 0px var(--border-dark);
+            transition: var(--transition);
+        }
+
+        .hero-image:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 8px 8px 0px var(--border-dark);
+        }
+
+        /* Section 3: Biodata (About Me Grid) */
+        .biodata-section {
+            padding: 60px 40px;
+            border-bottom: 2px solid var(--border-dark);
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--border-dark);
+            margin-bottom: 8px;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            font-size: 1rem;
+        }
+
+        /* Grid Utama 3 Kolom untuk Desktop */
+        .biodata-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .biodata-card {
+            background-color: #f3f4f6;
+            border: 2px solid var(--border-dark);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .biodata-card:hover {
+            background-color: #ffffff;
+            box-shadow: 4px 4px 0px var(--border-dark);
+            transform: translate(-2px, -2px);
+        }
+
+        .biodata-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--border-dark);
+            border-bottom: 1.5px solid var(--border-dark);
+            padding-bottom: 8px;
+            display: inline-block;
+        }
+
+        .biodata-card p {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            word-wrap: break-word;
+        }
+
+        /* Section 4: Portofolio */
+        .portfolio-section {
+            padding: 60px 40px;
+        }
+
+        /* Grid Otomatis Responsif Menggunakan auto-fit */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .portfolio-card {
+            border: 2px solid var(--border-dark);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Placeholder Gambar Portofolio */
+        .portfolio-img-placeholder {
+            background-color: #e5e7eb;
+            height: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+            color: #4b5563;
+            font-size: 1.1rem;
+            border-bottom: 2px solid var(--border-dark);
+        }
+
+        .portfolio-details {
+            padding: 20px;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .portfolio-details h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--border-dark);
+            margin-bottom: 8px;
+        }
+
+        .portfolio-details p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* MEDIA QUERIES: TABLET */
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr; /* Stacked layout */
+                text-align: center;
+                gap: 30px;
+                padding: 40px 24px;
+            }
+
+            .hero-content {
+                align-items: center;
+            }
+
+            .hero-image-container {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .biodata-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 Kolom di Tablet */
+                gap: 16px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 Kolom di Tablet */
+                gap: 20px;
+            }
+
+            .navbar {
+                padding: 20px 24px;
+            }
+
+            .biodata-section, .portfolio-section {
+                padding: 40px 24px;
+            }
+        }
+
+        /* MEDIA QUERIES: MOBILE */
+        @media (max-width: 640px) {
+            body {
+                padding: 10px 5px;
+            }
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+                text-align: center;
+            }
+
+            .nav-links {
+                gap: 16px;
+            }
+
+            .hero {
+                padding: 30px 15px;
+            }
+
+            .hero-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero-image-container {
+                max-width: 100%;
+            }
+
+            .biodata-grid {
+                grid-template-columns: 1fr; /* 1 Kolom Penuh di Mobile */
+                gap: 12px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr; /* 1 Kolom Penuh di Mobile */
+                gap: 16px;
+            }
+
+            .biodata-section, .portfolio-section {
+                padding: 30px 15px;
+            }
+        }

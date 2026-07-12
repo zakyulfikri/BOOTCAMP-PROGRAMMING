@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <!-- Pengaturan Viewport untuk Responsivitas Dasar -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Portofolio Klasik Modern</title>
+    
+    <!-- Link Font Inter untuk tampilan modern -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Container Utama Seluruh Halaman -->
+    <div class="container">
+        
+        <!-- SECTION 1: Menu / Navigasi -->
+        <header>
+            <nav class="navbar">
+                <!-- Sisi Kiri: Brand -->
+                <a href="#" class="brand">Brand</a>
+                
+                <!-- Sisi Kanan: Menu Link -->
+                <ul class="nav-links">
+                    <li><a href="#header">Header</a></li>
+                    <li><a href="#biodata">Biodata</a></li>
+                    <li><a href="#portfolio">Portofolio</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- SECTION 2: Header (Welcome Hero) -->
+        <main>
+            <section id="header" class="hero">
+                <!-- Kolom Kiri: Judul dan Teks Penjelasan -->
+                <div class="hero-content">
+                    <h2>Welcome to My Website</h2>
+                    <p>Ini adalah contoh header dengan dua kolom. Kolom ini berisi teks penjelasan tentang website portofolio modern yang dinamis dan berkelas.</p>
+                    <!-- Tombol Pelajari Lebih Lanjut -->
+                    <button class="hero-btn" type="button" onclick="window.location.href='#biodata'">Pelajari Lebih Lanjut</button>
+                </div>
+                
+                <!-- Kolom Kanan: Gambar yang Responsif -->
+                <div class="hero-image-container">
+                    <!-- Ditambahkan onerror fallback ke Unsplash jika file lokal 'IMG_1095+G+.jpg' tidak ditemukan -->
+                    <img src="IMG_1095+G+.jpg"  alt="Gambar Header Saya" class="hero-image">
+                </div>
+            </section>
+
+            <!-- SECTION 3: Biodata (About Me dengan 6 Box Grid) -->
+            <section id="biodata" class="biodata-section">
+                <h2 class="section-title">About Me</h2>
+                <div class="section-subtitle">A brief introduction about myself</div>
+                
+                <!-- Grid Cards Biodata -->
+                <div class="biodata-grid">
+                    <!-- Box 1 -->
+                    <div class="biodata-card">
+                        <h3>Full Name</h3>
+                        <p>Muhammmad Zakyul Fikri</p>
+                    </div>
+                    <!-- Box 2 -->
+                    <div class="biodata-card">
+                        <h3>Education</h3>
+                        <p>S1 Teknik Komputer</p>
+                    </div>
+                    <!-- Box 3 -->
+                    <div class="biodata-card">
+                        <h3>Pekerjaan</h3>
+                        <p>Fresh Graduate</p>
+                    </div>
+                    <!-- Box 4 -->
+                    <div class="biodata-card">
+                        <h3>Contact</h3>
+                        <p>+62 853 2665 6983<br>mzakyulfiikr@gmail.com</p>
+                    </div>
+                    <!-- Box 5 -->
+                    <div class="biodata-card">
+                        <h3>Hobi</h3>
+                        <p>Billiards</p>
+                    </div>
+                    <!-- Box 6 -->
+                    <div class="biodata-card">
+                        <h3>Alamat</h3>
+                        <p>Jl. Merpati No. 168G, Gejayan, Condongcatur, Depok, Sleman, Yogyakarta</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: Portofolio -->
+            <section id="portfolio" class="portfolio-section">
+                <h2 class="section-title" style="text-align: center; margin-bottom: 40px;">Portofolio</h2>
+                
+                <!-- Grid Cards Portofolio -->
+                <div class="portfolio-grid">
+                    <!-- Kartu Proyek 1 -->
+                    <article class="portfolio-card">
+                        <div class="portfolio-img-placeholder">
+                            <span>350 &times; 200</span>
+                        </div>
+                        <div class="portfolio-details">
+                            <h4>Proyek 1</h4>
+                            <p>Deskripsi proyek 1.</p>
+                        </div>
+                    </article>
+
+                    <!-- Kartu Proyek 2 -->
+                    <article class="portfolio-card">
+                        <div class="portfolio-img-placeholder">
+                            <span>350 &times; 200</span>
+                        </div>
+                        <div class="portfolio-details">
+                            <h4>Proyek 2</h4>
+                            <p>Deskripsi proyek 2.</p>
+                        </div>
+                    </article>
+
+                    <!-- Kartu Proyek 3 -->
+                    <article class="portfolio-card">
+                        <div class="portfolio-img-placeholder">
+                            <span>350 &times; 200</span>
+                        </div>
+                        <div class="portfolio-details">
+                            <h4>Proyek 3</h4>
+                            <p>Deskripsi proyek 3.</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+    </div>
+
+</body>
+</html>
