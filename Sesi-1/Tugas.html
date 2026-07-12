@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <!-- Pengaturan Viewport untuk Responsivitas Dasar -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Portofolio Kalsik</title>
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#0000ee" vlink="#551a8b" alink="#ff0000">
+
+    <!-- 
+      Tabel Utama sebagai Container Seluruh Halaman.
+      Menggunakan border="1" untuk memberikan garis luar solid hitam seperti pada wireframe.
+    -->
+    <table border="1" cellspacing="1" cellpadding="20" width="95%" align="center" bordercolor="#999999">
+        
+        <!-- SECTION 1: Menu / Navigasi -->
+        <tr>
+            <td colspan="2">
+                <table border="0" width="100%" cellpadding="5" cellspacing="0">
+                    <tr>
+                        <!-- Sisi Kiri: Brand -->
+                        <td align="left">
+                            <font face="Arial, Helvetica, sans-serif" size="4"><b>Brand</b></font>
+                        </td>
+                        <!-- Sisi Kanan: Menu Link -->
+                        <td align="right">
+                            <font face="Arial, Helvetica, sans-serif" size="3">
+                                <a href="#header">Header</a> &nbsp;&nbsp;&nbsp;&nbsp; 
+                                <a href="#biodata">Biodata</a> &nbsp;&nbsp;&nbsp;&nbsp; 
+                                <a href="#portfolio">Portofolio</a>
+                            </font>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <!-- SECTION 2: Header (Judul di Kiri & Gambar di Kanan) -->
+        <tr id="header">
+            <!-- Kolom Kiri: Judul dan Teks Penjelasan -->
+            <td width="50%" valign="middle">
+                <font face="Arial, Helvetica, sans-serif">
+                    <h2>Welcome to My Website</h2>
+                    <p>Ini adalah contoh header dengan dua kolom. Kolom ini berisi teks seperti ini.</p>
+                    <!-- Tombol Pelajari Lebih Lanjut -->
+                    <input type="button" value="Pelajari Lebih Lanjut">
+                </font>
+            </td>
+            <!-- Kolom Kanan: Placeholder Gambar 600x400 -->
+            <td width="50%" align="center" valign="middle">
+                <img src="IMG_1095+G+.jpg" alt="Gambar Header Saya" width="50%" border="1">
+            </td>
+        </tr>
+
+        <!-- SECTION 3: Biodata (About Me dengan 6 Box) -->
+        <tr id="biodata">
+            <td colspan="2" align="center" valign="top">
+                <font face="Arial, Helvetica, sans-serif">
+                    <br>
+                    <h2>About Me</h2>
+                    <font color="#666666">A brief introduction about myself</font>
+                    <br><br><br>
+                    
+                    <!-- Tabel Grid 2x3 untuk Biodata -->
+                    <table border="1" bordercolor="#cccccc" cellspacing="10" cellpadding="15" width="100%">
+                        <!-- Baris Pertama: Full Name, Education, Pekerjaan -->
+                        <tr>
+                            <td align="center" bgcolor="#eeeeee" width="33%">
+                                <font face="Arial, Helvetica, sans-serif" size="3"><h3>Full Name</h3></font>
+                                <p>Muhammmad Zakyul Fikri</p>
+                            </td>
+                            <td align="center" bgcolor="#eeeeee" width="33%">
+                                <font face="Arial, Helvetica, sans-serif" size="3"><h3>Education</h3></font>
+                                <p>S1 Teknik Komputer</p>
+                            </td>
+                            <td align="center" bgcolor="#eeeeee" width="33%">
+                                <font face="Arial, Helvetica, sans-serif" size="3"><h3>Pekerjaan</h3></font>
+                                <p>Fresh Graduate</p>
+                            </td>
+                        </tr>
+                        <!-- Baris Kedua: Contact, Hobi, Alamat -->
+                        <tr>
+                            <td align="center" bgcolor="#eeeeee">
+                                <font face="Arial, Helvetica, sans-serif" size="3"><h3>Contact</h3></font>
+                                <p>+62 853 2665 6983 | mzakyulfiikr@gmail.com</p>
+                            </td>
+                            <td align="center" bgcolor="#eeeeee">
+                                <font face="Arial, Helvetica, sans-serif" size="3"><h3>Hobi</h3></font>
+                                <p>Billiards</p>
+                            </td>
+                            <td align="center" bgcolor="#eeeeee">
+                                <font face="Arial, Helvetica, sans-serif" size="3"><h3>Alamat</h3></font>
+                                <p>Jl. Merpati  No. 168G, Gejayan, Condongcatur, Depok, Sleman, Yogyakarta</p>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                </font>
+            </td>
+        </tr>
+
+        <!-- SECTION 4: Portofolio (Gambar, Nama, Deskripsi) -->
+        <tr id="portfolio">
+            <td colspan="2" align="center" valign="top">
+                <font face="Arial, Helvetica, sans-serif">
+                    <br>
+                    <h2>Portofolio</h2>
+                    <br><br>
+                    
+                    <!-- Tabel Baris Tunggal untuk 3 Kolom Kartu Portofolio -->
+                    <table border="0" cellspacing="15" cellpadding="0" width="100%">
+                        <tr>
+                            <!-- Kartu Proyek 1 -->
+                            <td width="33%" valign="top">
+                                <table border="1" bordercolor="#000000" cellspacing="0" cellpadding="10" width="100%">
+                                    <tr>
+                                        <!-- Placeholder Gambar Proyek 350x200 -->
+                                        <td align="center" bgcolor="#dddddd" height="150" valign="middle">
+                                            <font face="Arial, Helvetica, sans-serif" size="4" color="#555555"><b>350 &times; 200</b></font>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <!-- Detail Proyek 1 -->
+                                        <td align="center" valign="top">
+                                            <font face="Arial, Helvetica, sans-serif">
+                                                <b>Proyek 1</b><br>
+                                                <font size="2" color="#555555">Deskripsi proyek 1.</font>
+                                            </font>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+
+                            <!-- Kartu Proyek 2 -->
+                            <td width="33%" valign="top">
+                                <table border="1" bordercolor="#000000" cellspacing="0" cellpadding="10" width="100%">
+                                    <tr>
+                                        <!-- Placeholder Gambar Proyek 350x200 -->
+                                        <td align="center" bgcolor="#dddddd" height="150" valign="middle">
+                                            <font face="Arial, Helvetica, sans-serif" size="4" color="#555555"><b>350 &times; 200</b></font>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <!-- Detail Proyek 2 -->
+                                        <td align="center" valign="top">
+                                            <font face="Arial, Helvetica, sans-serif">
+                                                <b>Proyek 2</b><br>
+                                                <font size="2" color="#555555">Deskripsi proyek 2.</font>
+                                            </font>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+
+                            <!-- Kartu Proyek 3 -->
+                            <td width="33%" valign="top">
+                                <table border="1" bordercolor="#000000" cellspacing="0" cellpadding="10" width="100%">
+                                    <tr>
+                                        <!-- Placeholder Gambar Proyek 350x200 -->
+                                        <td align="center" bgcolor="#dddddd" height="150" valign="middle">
+                                            <font face="Arial, Helvetica, sans-serif" size="4" color="#555555"><b>350 &times; 200</b></font>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <!-- Detail Proyek 3 -->
+                                        <td align="center" valign="top">
+                                            <font face="Arial, Helvetica, sans-serif">
+                                                <b>Proyek 3</b><br>
+                                                <font size="2" color="#555555">Deskripsi proyek 3.</font>
+                                            </font>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                </font>
+            </td>
+        </tr>
+
+    </table>
+
+</body>
+</html>
