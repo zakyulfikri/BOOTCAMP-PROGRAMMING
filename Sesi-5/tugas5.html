@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z Shop - E-Commerce Praktis</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="#">
+                <i class="fa-solid fa-bag-shopping me-2 fs-3"></i>
+                <span>Z Shop</span>
+            </a>
+            <div class="d-flex align-items-center ms-auto">
+                <button class="btn btn-outline-primary position-relative touch-target rounded-pill me-2 px-3" data-bs-toggle="modal" data-bs-target="#cartModal">
+                    <i class="fa-solid fa-cart-shopping me-1"></i>
+                    <span class="d-none d-sm-inline">Keranjang</span>
+                    <span id="cart-count-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        <!-- Hero Banner with Image Background -->
+        <div class="hero-banner text-center">
+            <div class="row justify-content-center px-4">
+                <div class="col-lg-8">
+                    <h1 class="fw-bold mb-2">Belanja Puas, Kualitas Berkelas!</h1>
+                    <p class="lead mb-3 opacity-90">Dapatkan promo menarik, diskon mingguan, dan pengiriman kilat ke seluruh Indonesia.</p>
+                    <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-semibold shadow-sm">
+                        <i class="fa-solid fa-bolt me-1"></i> Promo Terbatas Minggu Ini
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Workspace -->
+        <div class="row g-4">
+            <!-- Sidebar Filter -->
+            <div class="col-lg-3">
+                <div class="filter-card">
+                    <h5 class="fw-bold mb-3 d-flex align-items-center">
+                        <i class="fa-solid fa-sliders text-primary me-2"></i> Filter Produk
+                    </h5>
+                    
+                    <!-- Search Input -->
+                    <div class="mb-4">
+                        <label for="search-input" class="form-label fw-semibold text-muted small uppercase">Cari Produk</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
+                            <input type="text" id="search-input" class="form-control bg-light border-start-0" placeholder="Ketik nama produk...">
+                        </div>
+                    </div>
+
+                    <!-- Category Filter -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold text-muted small uppercase mb-2">Kategori</label>
+                        <select id="category-filter" class="form-select bg-light">
+                            <option value="all">Semua Kategori</option>
+                            <option value="Elektronik">Elektronik</option>
+                            <option value="Fashion">Fashion</option>
+                            <option value="Rumah Tangga">Rumah Tangga</option>
+                            <option value="Olahraga">Olahraga</option>
+                            <option value="Kecantikan">Kecantikan & Kesehatan</option>
+                        </select>
+                    </div>
+
+                    <!-- Price Filter -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold text-muted small uppercase mb-2">Rentang Harga</label>
+                        <div class="mb-2">
+                            <label for="min-price" class="small text-muted">Harga Minimum (Rp)</label>
+                            <input type="number" id="min-price" class="form-control bg-light" placeholder="0">
+                        </div>
+                        <div>
+                            <label for="max-price" class="small text-muted">Harga Maksimum (Rp)</label>
+                            <input type="number" id="max-price" class="form-control bg-light" placeholder="99000000">
+                        </div>
+                    </div>
+
+                    <!-- Sort -->
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold text-muted small uppercase mb-2">Urutkan</label>
+                        <select id="sort-select" class="form-select bg-light">
+                            <option value="default">Relevansi</option>
+                            <option value="price-asc">Harga: Rendah ke Tinggi</option>
+                            <option value="price-desc">Harga: Tinggi ke Rendah</option>
+                            <option value="name-asc">Nama: A ke Z</option>
+                        </select>
+                    </div>
+
+                    <!-- Reset Button -->
+                    <button id="btn-reset-filters" class="btn btn-outline-danger w-full w-100 rounded-pill mt-2">
+                        <i class="fa-solid fa-arrow-rotate-left me-1"></i> Atur Ulang Filter
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product Grid Area -->
+            <div class="col-lg-9">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <p class="text-muted mb-0"><span id="product-count" class="fw-bold text-dark">0</span> produk ditemukan</p>
+                </div>
+
+                <!-- Grid Product Cards -->
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4" id="product-grid">
+                    <!-- Cards will be populated dynamically by Javascript -->
+                </div>
+
+                <!-- Empty State -->
+                <div id="empty-state" class="text-center py-5 d-none">
+                    <img src="https://placehold.co/150x150/faf6f6/94a3b8?text=Empty" alt="Tidak Ditemukan" class="img-fluid rounded-circle mb-3" style="width: 120px;">
+                    <h5 class="fw-bold">Produk Tidak Ditemukan</h5>
+                    <p class="text-muted">Cobalah mengubah kata kunci pencarian atau pengaturan filter Anda.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detail Modal -->
+    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header border-0 bg-light">
+                    <h5 class="modal-title fw-bold" id="detailModalLabel">Detail Produk</h5>
+                    <button type="button" class="btn-close" data-bs-shadow="none" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="detail-image" src="" alt="" class="img-fluid rounded-3 mb-3 w-100" style="object-fit: cover; max-height: 300px;">
+                    <span id="detail-category" class="badge bg-primary mb-2"></span>
+                    <h4 id="detail-name" class="fw-bold text-dark mb-1"></h4>
+                    <p id="detail-price" class="fs-5 fw-bold text-primary mb-3"></p>
+                    <p id="detail-description" class="text-muted"></p>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Tutup</button>
+                    <button id="detail-add-to-cart-btn" type="button" class="btn btn-primary rounded-pill px-4"><i class="fa-solid fa-cart-plus me-1"></i> Tambah ke Keranjang</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header border-0 bg-light">
+                    <h5 class="modal-title fw-bold" id="cartModalLabel"><i class="fa-solid fa-cart-shopping text-primary me-2"></i>Keranjang Belanja Anda</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="cart-items-wrapper">
+                        <!-- Cart elements loaded dynamically -->
+                    </div>
+                    <div id="cart-empty-message" class="text-center py-4 d-none">
+                        <i class="fa-solid fa-basket-shopping text-muted fs-1 mb-2"></i>
+                        <p class="text-muted mb-0">Keranjang belanja Anda masih kosong.</p>
+                    </div>
+                    <hr class="my-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="fw-bold mb-0">Total Tagihan:</h5>
+                        <h4 class="fw-bold text-primary mb-0" id="cart-total-price">Rp 0</h4>
+                    </div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Lanjut Belanja</button>
+                    <button id="checkout-btn" type="button" class="btn btn-primary rounded-pill px-4" disabled>Selesaikan Pembelian</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thank You / Checkout Success Modal -->
+    <div class="modal fade" id="checkoutSuccessModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow text-center p-4">
+                <div class="modal-body">
+                    <i class="fa-solid fa-circle-check text-success display-2 mb-3"></i>
+                    <h3 class="fw-bold">Pembayaran Berhasil!</h3>
+                    <p class="text-muted">Terima kasih telah berbelanja di Nusantara Mart. Pesanan Anda akan segera kami proses dan kirimkan.</p>
+                    <button type="button" class="btn btn-primary rounded-pill px-4" data-bs-dismiss="modal">Selesai</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Toasts container for notifications -->
+    <div class="toast-container">
+        <div id="cartToast" class="toast align-items-center text-bg-success border-0 shadow-sm" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="fa-solid fa-circle-check me-2"></i> Produk berhasil ditambahkan ke keranjang!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5.3 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // 50 Product Dataset from JavaScript Array
+        const products = [
+            // ELEKTRONIK (10)
+            { id: 1, name: "Smartwatch Sport Active 4G", price: 1250000, description: "Smartwatch premium dengan layar AMOLED, monitor detak jantung, GPS tracker, dan dukungan kartu SIM 4G.", category: "Elektronik", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80" },
+            { id: 2, name: "Wireless ANC Headphones X90", price: 1890000, description: "Headphone over-ear dengan fitur Active Noise Cancelling termutakhir, kualitas audio resolusi tinggi, dan ketahanan baterai hingga 40 jam.", category: "Elektronik", image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80" },
+            { id: 3, name: "Smartphone Prime Ultra 5G", price: 6799000, description: "Prosesor tangguh Octa-Core, RAM 8GB, memori internal 256GB, dan kamera utama 108MP untuk kualitas gambar super tajam.", category: "Elektronik", image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&q=80" },
+            { id: 4, name: "Fast Charging Powerbank 20000mAh", price: 349000, description: "Powerbank berkapasitas besar dengan port pengisian daya cepat USB-C Power Delivery 22.5W, aman untuk dibawa ke dalam kabin pesawat.", category: "Elektronik", image: "https://images.unsplash.com/photo-1609592424109-dd9892f1b17c?w=500&q=80" },
+            { id: 5, name: "Mechanical Gaming Keyboard RGB", price: 799000, description: "Switch mekanis taktil biru dengan backlit RGB kustomisasi penuh, rancangan kokoh berbahan plat aluminium.", category: "Elektronik", image: "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=500&q=80" },
+            { id: 6, name: "Wireless Ergonomic Mouse v2", price: 299000, description: "Desain ergonomis vertikal mengurangi kelelahan pergelangan tangan, konektivitas dual-mode Bluetooth & dongle 2.4Ghz.", category: "Elektronik", image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=500&q=80" },
+            { id: 7, name: "Curved Gaming Monitor 27\" IPS 144Hz", price: 3100000, description: "Layar lengkung 27 inci resolusi full HD, refresh rate 144Hz, waktu respon super cepat 1ms untuk pengalaman bermain tanpa lag.", category: "Elektronik", image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500&q=80" },
+            { id: 8, name: "Stereo Bluetooth Earbuds TWS", price: 420000, description: "True Wireless Stereo dengan sensor sentuh, teknologi Bluetooth 5.3 yang stabil, serta ketahanan air tersertifikasi IPX5.", category: "Elektronik", image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500&q=80" },
+            { id: 9, name: "Portable Speaker Waterproof", price: 549000, description: "Speaker nirkabel luar ruangan, tahan banting, anti air IPX7, dengan bass mendalam yang menggelegar dan strap praktis.", category: "Elektronik", image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500&q=80" },
+            { id: 10, name: "Notebook Slim Book 14\" Ryzen 5", price: 8200000, description: "Tipis, ringan, ditenagai oleh prosesor Ryzen 5 dengan SSD NVMe 512GB, layar Full HD bezelless, ideal untuk mobilitas tinggi.", category: "Elektronik", image: "https://images.unsplash.com/photo-1496181130204-755241544e35?w=500&q=80" },
+
+            // FASHION (10)
+            { id: 11, name: "Kaos Polos Cotton Combed 30s", price: 65000, description: "Bahan katun murni berkualitas premium yang adem, halus, menyerap keringat, dan tidak mudah melar setelah dicuci.", category: "Fashion", image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500&q=80" },
+            { id: 12, name: "Jaket Denim Klasik Indigo", price: 289000, description: "Jaket jeans tebal klasik dengan pengerjaan jahitan ganda yang kokoh, saku fungsional luar dalam bergaya vintage.", category: "Fashion", image: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=500&q=80" },
+            { id: 13, name: "Sepatu Sneaker Retro Running", price: 450000, description: "Alas kaki kasual dengan bantalan kaki fleksibel empuk, rajutan breathable mesh, ideal untuk aktivitas olahraga ringan dan santai.", category: "Fashion", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500&q=80" },
+            { id: 14, name: "Tas Ransel Kanvas Anti Air", price: 235000, description: "Tas punggung fungsional dengan kompartemen laptop 15.6 inci, saku minum eksternal, berbahan kanvas dilapisi lilin anti percikan.", category: "Fashion", image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&q=80" },
+            { id: 15, name: "Kemeja Flanel Lengan Panjang", price: 175000, description: "Motif kotak-kotak klasik berbahan katun flanel tebal bertekstur lembut, sempurna untuk tampilan kasual sehari-hari.", category: "Fashion", image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&q=80" },
+            { id: 16, name: "Jam Tangan Analog Minimalis", price: 320000, description: "Arloji berdesain minimalis estetik, tali kulit sintetis berkualitas, ditenagai mesin kuarsa presisi, tahan air tingkat dasar.", category: "Fashion", image: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=500&q=80" },
+            { id: 17, name: "Kacamata Hitam Aviator UV400", price: 110000, description: "Bingkai logam kokoh berlapis emas tipis dengan lensa terpolarisasi yang melindungi mata secara total dari radiasi sinar ultraviolet matahari.", category: "Fashion", image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500&q=80" },
+            { id: 18, name: "Topi Baseball Klasik Bordir", price: 55000, description: "Topi anyaman katun twill berstruktur, pengait sabuk logam adjustable, desain grafis kasual nan serbaguna.", category: "Fashion", image: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=500&q=80" },
+            { id: 19, name: "Celana Panjang Chino Slim Fit", price: 195000, description: "Bahan katun katun twill melar berkualitas tinggi yang nyaman dipakai bergerak sepanjang hari, potongan pas modern.", category: "Fashion", image: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=500&q=80" },
+            { id: 20, name: "Hoodie Fleece Hangat Minimalis", price: 210000, description: "Jaket pullover bertudung tebal berbahan kain katun fleece berbulu halus di bagian dalam, saku kanguru lapang.", category: "Fashion", image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&q=80" },
+
+            // RUMAH TANGGA (10)
+            { id: 21, name: "Blender Portable USB Juicer", price: 145000, description: "Juicer isi ulang USB portabel yang mudah dibawa bepergian, pisau baja tahan karat bertenaga tinggi.", category: "Rumah Tangga", image: "https://images.unsplash.com/photo-1578643463396-0997cb5328c1?w=500&q=80" },
+            { id: 22, name: "Lampu Meja Estetik Minimalis", price: 185000, description: "Lampu tidur hias berkaki kayu natural dengan tudung linen lembut, memancarkan pencahayaan hangat menenangkan mata.", category: "Rumah Tangga", image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=500&q=80" },
+            { id: 23, name: "Botol Minum Tumbler Termos Vakum", price: 125000, description: "Menjaga air panas / es tetap dingin hingga 12 jam, dinding isolasi ganda berbahan stainless steel food grade 304.", category: "Rumah Tangga", image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=500&q=80" },
+            { id: 24, name: "Pisau Set Dapur Keramik 6-in-1", price: 155000, description: "Set pisau berlapisan keramik anti lengket premium, memotong daging dan buah presisi, termasuk gunting dapur.", category: "Rumah Tangga", image: "https://images.unsplash.com/photo-1593113630400-ea4288922497?w=500&q=80" },
+            { id: 25, name: "Bantal Sofa Katun Lembut", price: 75000, description: "Isian serat silikon murni empuk dengan sarung katun bersleting tersembunyi yang mudah dilepas dan dicuci.", category: "Rumah Tangga", image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=500&q=80" },
+            { id: 26, name: "Rak Buku Minimalis 3 Tingkat", price: 299000, description: "Rak penyimpanan serbaguna berbahan kayu olahan tebal berlapisan melamin anti air yang awet dan mudah dirakit.", category: "Rumah Tangga", image: "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?w=500&q=80" },
+            { id: 27, name: "Lilin Aromaterapi Kedelai Alami", price: 60000, description: "Lilin wangi berbahan dasar minyak kedelai alami non-toksik dengan paduan aroma segar Lavender dan Chamomile penenang stres.", category: "Rumah Tangga", image: "https://images.unsplash.com/photo-1603006905003-be475563bc59?w=500&q=80" },
+            { id: 28, name: "Cermin Gantung Bulat Kayu", price: 199000, description: "Kaca hias dinding berdiameter 40cm dilingkari bingkai kayu solid estetik untuk mempercantik area kamar atau kamar mandi.", category: "Rumah Tangga", image: "https://images.unsplash.com/photo-1618220179428-22790b461013?w=500&q=80" },
+            { id: 29, name: "Alat Pel Praktis Spray Mop", price: 115000, description: "Inovasi mengepel modern tanpa memeras manual, tuas semprot air merata dan kepala pel serat mikro yang berputar bebas.", category: "Rumah Tangga", image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=500&q=80" },
+            { id: 30, name: "Kotak Makan Bento Sekat Stainless", price: 89000, description: "Wadah bekal makanan bersekat dengan lapisan insulasi termal, penutup clip kunci anti bocor dan sendok garpu gratis.", category: "Rumah Tangga", image: "https://images.unsplash.com/photo-1543083503-4f08e7b99c75?w=500&q=80" },
+
+            // OLAHRAGA (10)
+            { id: 31, name: "Matras Yoga TPE Non-Slip 6mm", price: 165000, description: "Matras yoga ramah lingkungan berbahan TPE ramah sendi, garis pandu posisi simetris, bertekstur anti slip dua sisi.", category: "Olahraga", image: "https://images.unsplash.com/photo-1592432678016-e910b452f9a2?w=500&q=80" },
+            { id: 32, name: "Dumbbell Set 10kg Koper", price: 345000, description: "Sepasang barbel besi berlapis karet lengkap dengan klem pengunci ulir dalam satu koper plastik penyimpanan ringkas.", category: "Olahraga", image: "https://images.unsplash.com/photo-1638536532686-d610adfc8e5c?w=500&q=80" },
+            { id: 33, name: "Sepatu Lari Running Breathable", price: 560000, description: "Bobot ultra ringan dengan sol luar karet fleksibel bertraksi tinggi untuk stabilitas ekstra di berbagai permukaan jalan.", category: "Olahraga", image: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=500&q=80" },
+            { id: 34, name: "Botol Minum Olahraga Tritan 1L", price: 79000, description: "Berbahan plastik Tritan tahan banting yang bebas BPA, dilengkapi pengukur volume motivasi harian serta sedotan praktis.", category: "Olahraga", image: "https://images.unsplash.com/photo-1523362628745-0c100150b504?w=500&q=80" },
+            { id: 35, name: "Tali Skipping Digital Counter", price: 95000, description: "Tali lompat pintar dengan sensor hitung otomatis berbasis layar LCD untuk memantau kalori dan jumlah putaran latihan Anda.", category: "Olahraga", image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=500&q=80" },
+            { id: 36, name: "Tas Gym / Travel Bag Duffle", price: 189000, description: "Tas kompartemen basah dan kering terpisah, slot penyimpanan sepatu khusus, cocok dipakai ke gym atau jalan-jalan.", category: "Olahraga", image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&q=80" },
+            { id: 37, name: "Jersey Sepeda Premium Aero fit", price: 220000, description: "Baju sepeda profesional berpori udara mikro tinggi, saku fungsional belakang, strip pemantul cahaya demi keamanan malam.", category: "Olahraga", image: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=500&q=80" },
+            { id: 38, name: "Kacamata Renang Anti-Fog Professional", price: 110000, description: "Kacamata selam berlensa cermin anti embun, segel silikon fleksibel ramah kulit, menghalangi kebocoran air.", category: "Olahraga", image: "https://images.unsplash.com/photo-1518152006812-edab29b069ac?w=500&q=80" },
+            { id: 39, name: "Jersey Bola Klub DryFit", price: 135000, description: "Replika kaos jersey berkualitas dengan cetak sublimasi resolusi tinggi berbahan DryFit yang sejuk di kulit.", category: "Olahraga", image: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=500&q=80" },
+            { id: 40, name: "Raket Bulutangkis Carbon Fiber", price: 420000, description: "Poros raket ringan berkekuatan tinggi berbahan serat karbon utuh, tegangan senar mantap, gratis tas pelindung.", category: "Olahraga", image: "https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?w=500&q=80" },
+
+            // KECANTIKAN & KESEHATAN (10)
+            { id: 41, name: "Sunscreen SPF 50 PA++++ Gel", price: 85000, description: "Pelembab tabir surya bertekstur gel air super ringan berpelindung ganda, menyerap sekejap tanpa meninggalkan whitecast.", category: "Kecantikan", image: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=500&q=80" },
+            { id: 42, name: "Lip Serum Nourishing Cherry", price: 45000, description: "Minyak bibir bergizi tinggi yang mengembalikan rona merah alami bibir, menyingkirkan sel kulit mati bibir pecah-pecah.", category: "Kecantikan", image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=500&q=80" },
+            { id: 43, name: "Masker Wajah Clay Mugwort", price: 99000, description: "Masker pembersih pori-pori komedo secara mendalam dengan khasiat Mugwort menenangkan kemerahan wajah berjerawat.", category: "Kecantikan", image: "https://images.unsplash.com/photo-1567894340315-735d7c361db0?w=500&q=80" },
+            { id: 44, name: "Serum Vitamin C Pencerah Wajah", price: 135000, description: "Kandungan aktif Vitamin C murni yang mencerahkan kulit wajah kusam, meratakan noda hitam bekas jerawat.", category: "Kecantikan", image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=500&q=80" },
+            { id: 45, name: "Pembersih Wajah Micellar Water", price: 59000, description: "Penghapus makeup ramah kulit sensitif, tanpa bilas, bebas kandungan alkohol yang melembabkan seusai dibilas.", category: "Kecantikan", image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=500&q=80" },
+            { id: 46, name: "Pelembab Gel Ceramide Barrier", price: 120000, description: "Memperbaiki jaringan skin barrier rusak dengan teknologi Ceramide Kompleks berpadu ekstrak tanaman botani alami.", category: "Kecantikan", image: "https://images.unsplash.com/photo-1608248597481-496100c8c836?w=500&q=80" },
+            { id: 47, name: "Kuas Make Up Set Lembut 12-pcs", price: 145000, description: "Set alat rias berbulu serat nilon berkualitas sangat halus yang tidak merontok, gagang kayu ergonomis elegan.", category: "Kecantikan", image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500&q=80" },
+            { id: 48, name: "Parfum Premium Eau De Parfum 50ml", price: 275000, description: "Keharuman eksklusif maskulin dan feminin yang mewah tahan seharian, dikemas botol kaca kokoh minimalis.", category: "Kecantikan", image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=500&q=80" },
+            { id: 49, name: "Hand Cream Moist Sakura", price: 35000, description: "Losion pelembab kulit jari tangan beraroma bunga Sakura segar, mengatasi kekeringan akibat mencuci tangan.", category: "Kecantikan", image: "https://images.unsplash.com/photo-1617897903246-719242758050?w=500&q=80" },
+            { id: 50, name: "Hair Oil Serum Argan Alami", price: 110000, description: "Serum perawatan rambut rusak bercabang dengan formulasi minyak Argan Maroko guna hasil rambut berkilau halus.", category: "Kecantikan", image: "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=500&q=80" }
+        ];
+
+        // Cart state
+        let cart = [];
+
+        // DOM elements
+        const productGrid = document.getElementById("product-grid");
+        const emptyState = document.getElementById("empty-state");
+        const productCount = document.getElementById("product-count");
+        
+        // Filter inputs
+        const searchInput = document.getElementById("search-input");
+        const categoryFilter = document.getElementById("category-filter");
+        const minPriceInput = document.getElementById("min-price");
+        const maxPriceInput = document.getElementById("max-price");
+        const sortSelect = document.getElementById("sort-select");
+        const btnResetFilters = document.getElementById("btn-reset-filters");
+
+        // Cart DOM references
+        const cartCountBadge = document.getElementById("cart-count-badge");
+        const cartItemsWrapper = document.getElementById("cart-items-wrapper");
+        const cartEmptyMessage = document.getElementById("cart-empty-message");
+        const cartTotalPrice = document.getElementById("cart-total-price");
+        const checkoutBtn = document.getElementById("checkout-btn");
+
+        // Toast trigger reference
+        const cartToastElement = document.getElementById("cartToast");
+        const cartToast = new bootstrap.Toast(cartToastElement);
+
+        // Price formatter (Rupiah)
+        function formatRupiah(value) {
+            return new Intl.NumberFormat("id-ID", {
+                style: "currency",
+                currency: "IDR",
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(value);
+        }
+
+        // Helper: dynamic category class
+        function getCategoryClass(cat) {
+            switch(cat) {
+                case "Elektronik": return "badge-elektronik";
+                case "Fashion": return "badge-fashion";
+                case "Rumah Tangga": return "badge-rumahtangga";
+                case "Olahraga": return "badge-olahraga";
+                case "Kecantikan": return "badge-kecantikan";
+                default: return "bg-secondary";
+            }
+        }
+
+        // Render dynamic product list
+        function displayProducts(items) {
+            productGrid.innerHTML = "";
+            
+            if (items.length === 0) {
+                emptyState.classList.remove("d-none");
+                productCount.innerText = "0";
+                return;
+            }
+
+            emptyState.classList.add("d-none");
+            productCount.innerText = items.length;
+
+            items.forEach(product => {
+                const cardCol = document.createElement("div");
+                cardCol.className = "col";
+                cardCol.innerHTML = `
+                    <div class="product-card">
+                        <div class="product-image-wrapper">
+                            <span class="category-badge ${getCategoryClass(product.category)}">${product.category}</span>
+                            <img src="${product.image}" alt="${product.name}" class="product-image" onerror="this.onerror=null;this.src='https://placehold.co/500x375/e2e8f0/475569?text=${encodeURIComponent(product.name)}'">
+                        </div>
+                        <div class="product-info">
+                            <h5 class="product-title text-dark">${product.name}</h5>
+                            <p class="product-desc">${product.description}</p>
+                            <div class="product-price">${formatRupiah(product.price)}</div>
+                            <div class="row g-2 mt-auto pt-2">
+                                <div class="col-6">
+                                    <button class="btn btn-outline-primary w-100 touch-target rounded-pill d-flex align-items-center justify-content-center gap-1 px-2" onclick="openDetail(${product.id})">
+                                        <i class="fa-solid fa-eye"></i>
+                                        <span class="d-none d-sm-inline">Detail</span>
+                                    </button>
+                                </div>
+                                <div class="col-6">
+                                    <button class="btn btn-primary w-100 touch-target rounded-pill d-flex align-items-center justify-content-center gap-1 px-2" onclick="addToCart(${product.id})">
+                                        <i class="fa-solid fa-cart-plus"></i>
+                                        <span class="d-none d-sm-inline">Beli</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                productGrid.appendChild(cardCol);
+            });
+        }
+
+        // Filter & Sort core logic
+        function applyFilters() {
+            const query = searchInput.value.toLowerCase().trim();
+            const category = categoryFilter.value;
+            const minPrice = parseFloat(minPriceInput.value) || 0;
+            const maxPrice = parseFloat(maxPriceInput.value) || Infinity;
+            const sortVal = sortSelect.value;
+
+            // 1. Filter logic
+            let filtered = products.filter(product => {
+                const matchesSearch = product.name.toLowerCase().includes(query) || product.description.toLowerCase().includes(query);
+                const matchesCategory = category === "all" || product.category === category;
+                const matchesPrice = product.price >= minPrice && product.price <= maxPrice;
+
+                return matchesSearch && matchesCategory && matchesPrice;
+            });
+
+            // 2. Sort logic
+            if (sortVal === "price-asc") {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (sortVal === "price-desc") {
+                filtered.sort((a, b) => b.price - a.price);
+            } else if (sortVal === "name-asc") {
+                filtered.sort((a, b) => a.name.localeCompare(b.name));
+            }
+
+            displayProducts(filtered);
+        }
+
+        // Add event listeners for inputs
+        searchInput.addEventListener("input", applyFilters);
+        categoryFilter.addEventListener("change", applyFilters);
+        minPriceInput.addEventListener("input", applyFilters);
+        maxPriceInput.addEventListener("input", applyFilters);
+        sortSelect.addEventListener("change", applyFilters);
+
+        // Reset all filters button
+        btnResetFilters.addEventListener("click", () => {
+            searchInput.value = "";
+            categoryFilter.value = "all";
+            minPriceInput.value = "";
+            maxPriceInput.value = "";
+            sortSelect.value = "default";
+            applyFilters();
+        });
+
+        // Detail view modal mapping
+        const detailModalBootstrap = new bootstrap.Modal(document.getElementById('detailModal'));
+        let selectedProductForDetail = null;
+
+        function openDetail(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+
+            selectedProductForDetail = product;
+
+            document.getElementById("detail-image").src = product.image;
+            const catBadge = document.getElementById("detail-category");
+            catBadge.innerText = product.category;
+            catBadge.className = `badge mb-2 ${getCategoryClass(product.category)}`;
+            
+            document.getElementById("detail-name").innerText = product.name;
+            document.getElementById("detail-price").innerText = formatRupiah(product.price);
+            document.getElementById("detail-description").innerText = product.description;
+
+            detailModalBootstrap.show();
+        }
+
+        // Add to cart inside detail modal
+        document.getElementById("detail-add-to-cart-btn").addEventListener("click", () => {
+            if (selectedProductForDetail) {
+                addToCart(selectedProductForDetail.id);
+                detailModalBootstrap.hide();
+            }
+        });
+
+        // Cart functions
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+
+            const existingIndex = cart.findIndex(item => item.product.id === id);
+            if (existingIndex > -1) {
+                cart[existingIndex].quantity += 1;
+            } else {
+                cart.push({ product, quantity: 1 });
+            }
+
+            updateCartUI();
+            cartToast.show();
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.product.id !== id);
+            updateCartUI();
+        }
+
+        function changeQuantity(id, amount) {
+            const index = cart.findIndex(item => item.product.id === id);
+            if (index > -1) {
+                cart[index].quantity += amount;
+                if (cart[index].quantity <= 0) {
+                    removeFromCart(id);
+                } else {
+                    updateCartUI();
+                }
+            }
+        }
+
+        function updateCartUI() {
+            // Count total quantities
+            const totalQty = cart.reduce((acc, curr) => acc + curr.quantity, 0);
+            cartCountBadge.innerText = totalQty;
+
+            // Render list inside modal
+            cartItemsWrapper.innerHTML = "";
+            let totalBill = 0;
+
+            if (cart.length === 0) {
+                cartEmptyMessage.classList.remove("d-none");
+                checkoutBtn.disabled = true;
+            } else {
+                cartEmptyMessage.classList.add("d-none");
+                checkoutBtn.disabled = false;
+
+                cart.forEach(item => {
+                    const itemSubtotal = item.product.price * item.quantity;
+                    totalBill += itemSubtotal;
+
+                    const itemRow = document.createElement("div");
+                    itemRow.className = "d-flex align-items-center justify-content-between mb-3 pb-3 border-bottom";
+                    itemRow.innerHTML = `
+                        <div class="d-flex align-items-center me-3" style="flex: 1;">
+                            <img src="${item.product.image}" alt="${item.product.name}" class="rounded me-3" style="width: 60px; height: 60px; object-fit: cover;" onerror="this.onerror=null;this.src='https://placehold.co/100x100'">
+                            <div>
+                                <h6 class="fw-bold mb-0 text-dark" style="font-size: 0.9rem;">${item.product.name}</h6>
+                                <span class="small text-muted">${formatRupiah(item.product.price)}</span>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <!-- Quantity selector -->
+                            <div class="input-group input-group-sm me-3" style="width: 100px;">
+                                <button class="btn btn-outline-secondary" type="button" onclick="changeQuantity(${item.product.id}, -1)">-</button>
+                                <span class="form-control text-center bg-light border-secondary-subtle" style="font-weight: 500;">${item.quantity}</span>
+                                <button class="btn btn-outline-secondary" type="button" onclick="changeQuantity(${item.product.id}, 1)">+</button>
+                            </div>
+                            <!-- Subtotal & Trash -->
+                            <div class="text-end me-3" style="min-width: 100px;">
+                                <span class="fw-bold text-dark small">${formatRupiah(itemSubtotal)}</span>
+                            </div>
+                            <button class="btn btn-link text-danger p-0 border-0" onclick="removeFromCart(${item.product.id})" style="width: 24px; height: 24px;">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
+                    `;
+                    cartItemsWrapper.appendChild(itemRow);
+                });
+            }
+
+            cartTotalPrice.innerText = formatRupiah(totalBill);
+        }
+
+        // Checkout trigger integration
+        const cartModalBootstrap = new bootstrap.Modal(document.getElementById('cartModal'));
+        const checkoutSuccessModal = new bootstrap.Modal(document.getElementById('checkoutSuccessModal'));
+
+        checkoutBtn.addEventListener("click", () => {
+            // Close cart and open success panel
+            cartModalBootstrap.hide();
+            
+            // Empty cart arrays
+            cart = [];
+            updateCartUI();
+            
+            // Show dynamic modal
+            setTimeout(() => {
+                checkoutSuccessModal.show();
+            }, 300);
+        });
+
+        // Initialize display
+        window.onload = function () {
+            displayProducts(products);
+        }
+    </script>
+</body>
+</html>
