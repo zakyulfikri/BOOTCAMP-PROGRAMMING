@@ -1,0 +1,275 @@
+        :root {
+            --primary-color: #000000; /* Hitam Pekat (Jet Black) */
+            --secondary-color: #e11d48; /* Merah Crimson Premium */
+            --accent-color: #be123c; /* Merah Gelap */
+            --bg-light: #fbfbfb; /* Putih Bersih Ringan */
+            --text-dark: #0f172a; /* Slate Sangat Gelap */
+            --text-muted: #64748b; /* Slate Abu-abu */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* Tipografi Elegan Klasik Modern */
+        h1, h2, h3, .brand-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.9) !important;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-dark) !important;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--secondary-color) !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero / Header Section */
+        .hero-section {
+            padding: 160px 0 100px;
+            background: radial-gradient(circle at 90% 10%, rgba(13, 148, 136, 0.05) 0%, transparent 40%);
+        }
+
+        .hero-btn-primary {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: 2px solid var(--primary-color);
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .hero-btn-primary:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .hero-btn-outline {
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .hero-btn-outline:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Carousel Styling */
+        .carousel {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel-item img {
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .carousel-item img.profile-carousel-img {
+            object-fit: contain;
+            background-color: #b20e15; /* Kode warna merah pasfoto Anda agar menyatu sempurna */
+        }
+
+        .carousel-caption {
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            width: 100%;
+            left: 0;
+            bottom: 0;
+            padding: 40px 20px 20px;
+        }
+
+        /* Biodata Section Grid Card */
+        .section-title-container {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .section-divider {
+            width: 60px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .biodata-card {
+            background: #ffffff;
+            border: none;
+            border-radius: 16px;
+            padding: 30px 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .biodata-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: var(--secondary-color);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .biodata-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+        }
+
+        .biodata-card:hover::before {
+            opacity: 1;
+        }
+
+        .biodata-icon {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        /* Portfolio Cards */
+        .portfolio-card {
+            background: #ffffff;
+            border: none;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            height: 100%;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+        }
+
+        .portfolio-img-container {
+            position: relative;
+            overflow: hidden;
+            height: 240px;
+        }
+
+        .portfolio-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-card:hover .portfolio-img {
+            transform: scale(1.08);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .portfolio-card:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: var(--primary-color);
+            color: #94a3b8;
+            padding: 40px 0;
+            font-size: 0.95rem;
+        }
+
+        /* Custom Modal Styling */
+        .modal-content {
+            border-radius: 24px;
+            border: none;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .modal-header {
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            background-color: var(--bg-light);
+            border-top-left-radius: 24px;
+            border-top-right-radius: 24px;
+        }
+
+        /* Back to top button */
+        #btn-back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: none;
+            z-index: 99;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        #btn-back-to-top:hover {
+            background-color: var(--primary-color);
+            transform: scale(1.1);
+        }
