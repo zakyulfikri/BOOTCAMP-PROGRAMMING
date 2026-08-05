@@ -1,10 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    echo 'this is home';
-});
+Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/products', function () {
     echo 'this is products';
