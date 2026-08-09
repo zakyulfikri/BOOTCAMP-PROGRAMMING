@@ -1,18 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ShopController;
 
-Route::get('/', [HomeController::class, 'index']);
-
-Route::get('/products', function () {
-    echo 'this is products';
-});
-
-Route::get('/cart', function () {
-    echo 'this is cart';
-});
-
-Route::get('/checkout', function () {
-    echo 'this is checkout';
-});
+Route::get('/', [ShopController::class, 'home'])->name('home2');
+Route::get('/products', [ShopController::class, 'products'])->name('products.index');
+Route::get('/carts', [ShopController::class, 'carts'])->name('carts.index');
