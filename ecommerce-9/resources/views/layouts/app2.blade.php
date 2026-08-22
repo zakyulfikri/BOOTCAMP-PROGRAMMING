@@ -6,7 +6,7 @@
     <title>Z Shop - @yield('title', 'E-Commerce')</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+<body class="bg-white text-gray-900 flex flex-col min-h-screen">
 
     {{-- Component Navbar --}}
     @include('components.navbar')

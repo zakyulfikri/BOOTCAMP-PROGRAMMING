@@ -16,10 +16,14 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    {{-- Menu Katalog Produk --}}
-                    <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.index')">
-                        {{ __('Katalog Produk') }}
+                    <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')">
+                        {{ __('Kategori Produk') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')">
+                        {{ __('Produk') }}
+                    </x-nav-link>
+
                 </div>
             </div>
 
@@ -76,10 +80,14 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
-            {{-- Menu Katalog Produk (Mobile) --}}
-            <x-responsive-nav-link :href="route('products.index')" :active="request()->routeIs('products.index')">
-                {{ __('Katalog Produk') }}
+            <x-responsive-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')">
+                {{ __('Kategori Produk') }}
             </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('products.index')" :active="request()->routeIs('products.*')">
+                {{ __('Produk') }}
+            </x-responsive-nav-link>
+
         </div>
 
         <!-- Responsive Settings Options -->
