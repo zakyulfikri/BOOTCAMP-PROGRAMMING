@@ -1,6 +1,11 @@
-@if ($errors->any())<div class="mb-4 rounded bg-red-100 p-3 text-black"><ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>@endif
-<form action="{{ $action }}" method="POST" class="space-y-4">@csrf @if ($method !== 'POST') @method($method) @endif
-    <div><label for="name" class="mb-1 block font-medium">Nama Kategori</label><input id="name" name="name" value="{{ old('name', $category?->name) }}" required class="w-full rounded border-gray-300"></div>
-    <div><label for="slug" class="mb-1 block font-medium">Slug</label><input id="slug" name="slug" value="{{ old('slug', $category?->slug) }}" required class="w-full rounded border-gray-300"></div>
-    <div class="flex gap-3"><button class="rounded bg-red-600 px-4 py-2 font-semibold text-black hover:bg-red-700">Simpan</button><a href="{{ route('categories.index') }}" class="rounded border border-gray-300 px-4 py-2 text-black">Batal</a></div>
+@if ($errors->any())
+    <div class="mb-6 flex gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-800" role="alert">
+        <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-red-600 font-bold text-white">!</span>
+        <div><p class="font-bold">Periksa kembali isian Anda</p><ul class="mt-1 list-inside list-disc text-red-700">@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>
+    </div>
+@endif
+<form action="{{ $action }}" method="POST" class="space-y-6">@csrf @if ($method !== 'POST') @method($method) @endif
+    <div class="space-y-2"><label for="name" class="block text-sm font-bold text-slate-800">Nama kategori <span class="text-red-600">*</span></label><input id="name" name="name" value="{{ old('name', $category?->name) }}" required placeholder="Contoh: Elektronik" class="w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-red-500 focus:bg-white focus:ring-4 focus:ring-red-100"></div>
+    <div class="space-y-2"><label for="slug" class="block text-sm font-bold text-slate-800">Slug <span class="text-red-600">*</span></label><input id="slug" name="slug" value="{{ old('slug', $category?->slug) }}" required placeholder="contoh-elektronik" class="w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-red-500 focus:bg-white focus:ring-4 focus:ring-red-100"><p class="text-xs text-slate-500">Gunakan huruf kecil dan tanda hubung agar mudah dibaca di URL.</p></div>
+    <div class="flex flex-col-reverse gap-3 border-t border-slate-100 pt-6 sm:flex-row sm:justify-end"><a href="{{ route('categories.index') }}" class="rounded-xl border border-slate-200 px-5 py-3 text-center text-sm font-bold text-slate-600 transition hover:border-slate-300 hover:bg-slate-50">Batal</a><button type="submit" class="rounded-xl bg-red-600 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-red-200 transition hover:bg-red-700 hover:shadow-red-300">Simpan kategori</button></div>
 </form>

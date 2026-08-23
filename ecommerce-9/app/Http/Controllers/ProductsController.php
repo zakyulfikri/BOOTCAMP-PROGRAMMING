@@ -6,6 +6,7 @@ use App\Models\ProductCategory;
 use App\Models\Products;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class ProductsController extends Controller
 {
@@ -62,7 +63,13 @@ class ProductsController extends Controller
      */
     public function update(Request $request, Products $product)
     {
-        $product->update($this->validatedData($request, $product));
+        $data = $this->validatedData($request, $product);
+
+        if (isset($data['image']) && str_starts_with($product->image, 'storage/products/')) {
+            Storage::disk('public')->delete(str_replace('storage/', '', $product->image));
+        }
+
+        $product->update($data);
 
         return to_route('products.index')->with('success', 'Produk berhasil diperbarui.');
     }
@@ -79,17 +86,27 @@ class ProductsController extends Controller
 
     private function validatedData(Request $request, ?Products $product = null): array
     {
-        return $request->validate([
+        $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'slug' => [
                 'required', 'string', 'max:255',
                 Rule::unique('products', 'slug')->ignore($product),
             ],
             'description' => ['required', 'string'],
-            'image' => ['required', 'string', 'max:255'],
+            'image' => $product === null
+                ? ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048']
+                : ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'stock' => ['required', 'integer', 'min:0'],
             'price' => ['required', 'integer', 'min:0'],
             'product_category_id' => ['required', 'exists:product_categories,id'],
         ]);
+
+        if ($request->hasFile('image')) {
+            $validated['image'] = 'storage/'.$request->file('image')->store('products', 'public');
+        } elseif ($product !== null) {
+            unset($validated['image']);
+        }
+
+        return $validated;
     }
 }
