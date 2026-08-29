@@ -18,6 +18,7 @@ class Products extends Model
         'stock',
         'price',
         'product_category_id',
+        'click_count',
     ];
 
     // Relasi Many-to-One: Satu produk dimiliki oleh satu kategori

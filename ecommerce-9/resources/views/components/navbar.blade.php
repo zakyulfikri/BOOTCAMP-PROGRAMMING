@@ -1,15 +1,13 @@
 <nav x-data="{ open: false }" class="border-b border-gray-200 bg-white text-black shadow-lg">
     <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        <a href="{{ auth()->check() ? route('dashboard') : route('home2') }}" class="text-2xl font-black tracking-tight text-black">Z Shop<span class="text-black">.</span></a>
+        <a href="{{ route('dashboard') }}" class="text-2xl font-black tracking-tight text-black">Z Shop<span class="text-black">.</span></a>
 
         <div class="hidden items-center gap-2 md:flex">
             @auth
                 <a href="{{ route('dashboard') }}" class="rounded-lg px-4 py-2 text-sm font-semibold {{ request()->routeIs('dashboard') ? 'bg-red-600 text-black' : 'text-black hover:bg-red-50' }}">Dashboard</a>
             @endauth
-            <a href="{{ route('home2') }}" class="rounded-lg px-4 py-2 text-sm font-semibold {{ request()->routeIs('home2') ? 'bg-red-600 text-black' : 'text-black hover:bg-red-50' }}">Beranda</a>
             <a href="{{ route('categories.index') }}" class="rounded-lg px-4 py-2 text-sm font-semibold {{ request()->routeIs('categories.*') ? 'bg-red-600 text-black' : 'text-black hover:bg-red-50' }}">Kategori</a>
             <a href="{{ route('products.index') }}" class="rounded-lg px-4 py-2 text-sm font-semibold {{ request()->routeIs('products.*') ? 'bg-red-600 text-black' : 'text-black hover:bg-red-50' }}">Produk</a>
-            <a href="{{ route('carts.index') }}" class="rounded-lg px-4 py-2 text-sm font-semibold text-black hover:bg-red-50">Keranjang <span class="ml-1 rounded-full bg-red-600 px-2 py-0.5 text-xs text-black">0</span></a>
             @auth
                 <form method="POST" action="{{ route('logout') }}" class="ml-2">@csrf<button type="submit" class="rounded-lg border border-gray-300 px-4 py-2 text-sm font-semibold text-black hover:border-red-600 hover:bg-red-50">Keluar</button></form>
             @endauth
@@ -22,10 +20,8 @@
     <div x-show="open" x-transition class="border-t border-gray-200 px-4 pb-4 md:hidden">
         <div class="mx-auto max-w-7xl space-y-1 pt-3">
             @auth<a href="{{ route('dashboard') }}" class="block rounded-lg px-4 py-3 font-semibold text-black hover:bg-red-50">Dashboard</a>@endauth
-            <a href="{{ route('home2') }}" class="block rounded-lg px-4 py-3 font-semibold text-black hover:bg-red-50">Beranda</a>
             <a href="{{ route('categories.index') }}" class="block rounded-lg px-4 py-3 font-semibold text-black hover:bg-red-50">Kategori</a>
             <a href="{{ route('products.index') }}" class="block rounded-lg px-4 py-3 font-semibold text-black hover:bg-red-50">Produk</a>
-            <a href="{{ route('carts.index') }}" class="block rounded-lg px-4 py-3 font-semibold text-black hover:bg-red-50">Keranjang</a>
         </div>
     </div>
 </nav>
