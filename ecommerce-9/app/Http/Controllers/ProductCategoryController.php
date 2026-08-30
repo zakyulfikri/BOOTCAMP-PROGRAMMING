@@ -31,10 +31,7 @@ class ProductCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'slug' => ['required', 'string', 'max:255', 'unique:product_categories,slug'],
-        ]);
+        $validated = $this->validatedData($request);
 
         ProductCategory::create($validated);
 
@@ -62,13 +59,7 @@ class ProductCategoryController extends Controller
      */
     public function update(Request $request, ProductCategory $category)
     {
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'slug' => [
-                'required', 'string', 'max:255',
-                Rule::unique('product_categories', 'slug')->ignore($category),
-            ],
-        ]);
+        $validated = $this->validatedData($request, $category);
 
         $category->update($validated);
 
@@ -83,5 +74,16 @@ class ProductCategoryController extends Controller
         $category->delete();
 
         return to_route('categories.index')->with('success', 'Kategori berhasil dihapus.');
+    }
+
+    private function validatedData(Request $request, ?ProductCategory $category = null): array
+    {
+        return $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'slug' => [
+                'required', 'string', 'max:255',
+                Rule::unique('product_categories', 'slug')->ignore($category),
+            ],
+        ]);
     }
 }

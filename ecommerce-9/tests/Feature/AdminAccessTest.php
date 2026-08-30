@@ -25,3 +25,33 @@ test('admin user can access admin routes', function () {
 
     $response->assertOk();
 });
+
+test('admin user can access product creation page', function () {
+    $user = User::factory()->create([
+        'role' => 'admin',
+    ]);
+
+    $response = $this
+        ->actingAs($user)
+        ->get('/product/create');
+
+    $response->assertOk();
+});
+
+test('admin user can access category creation page', function () {
+    $user = User::factory()->create([
+        'role' => 'admin',
+    ]);
+
+    $response = $this
+        ->actingAs($user)
+        ->get('/product-category/create');
+
+    $response->assertOk();
+});
+
+test('public home page is accessible without login', function () {
+    $response = $this->get('/');
+
+    $response->assertOk();
+});
