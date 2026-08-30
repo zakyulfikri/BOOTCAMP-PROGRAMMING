@@ -14,7 +14,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
 
+Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::resource('categories', ProductCategoryController::class)->only([
         'index', 'create', 'store', 'edit', 'update', 'destroy',
     ]);
