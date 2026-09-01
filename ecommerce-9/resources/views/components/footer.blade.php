@@ -1,3 +1,7 @@
+@php
+    $isAdmin = auth()->check() && auth()->user()->role === 'admin';
+@endphp
+
 <footer class="mt-auto border-t border-red-100 bg-slate-950 text-slate-300">
     <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
@@ -10,9 +14,12 @@
             </div>
 
             <div class="flex flex-wrap items-center gap-4 text-sm text-slate-300">
-                <a href="{{ route('products.index') }}" class="transition hover:text-white">Produk</a>
-                <a href="{{ route('categories.index') }}" class="transition hover:text-white">Kategori</a>
-                <a href="{{ route('dashboard') }}" class="transition hover:text-white">Dashboard</a>
+                <a href="{{ route('home') }}" class="transition hover:text-white">Beranda</a>
+                <a href="{{ route('shop.products') }}" class="transition hover:text-white">Produk</a>
+                @if ($isAdmin)
+                    <a href="{{ route('categories.index') }}" class="transition hover:text-white">Kategori</a>
+                    <a href="{{ route('dashboard') }}" class="transition hover:text-white">Dashboard</a>
+                @endif
             </div>
         </div>
 

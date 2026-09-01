@@ -17,7 +17,7 @@ class ProductsController extends Controller
     {
         $products = Products::with('category')->latest()->paginate(10);
 
-        return view('products.index', compact('products'));
+        return view('admin.products.index', compact('products'));
     }
 
     /**
@@ -45,7 +45,9 @@ class ProductsController extends Controller
      */
     public function show(Products $product)
     {
-        //
+        $product->load('category');
+
+        return view('products.show', compact('product'));
     }
 
     /**

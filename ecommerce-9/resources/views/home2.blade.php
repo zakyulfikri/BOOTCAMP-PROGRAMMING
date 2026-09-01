@@ -13,8 +13,15 @@
                         Koleksi produk unggulan dengan kualitas terbaik, desain modern, dan harga yang ramah di kantong.
                     </p>
                     <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-                        <a href="{{ route('products.index') }}" class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-bold text-slate-900 transition hover:bg-red-50">Lihat Produk</a>
-                        <a href="{{ route('categories.index') }}" class="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10">Kategori</a>
+                        <a href="{{ route('shop.products') }}" class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-bold text-slate-900 transition hover:bg-red-50">Lihat Produk</a>
+                        @if (auth()->check())
+                            <a href="{{ route('dashboard') }}" class="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10">Dashboard</a>
+                        @else
+                            <a href="{{ route('login') }}" class="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10">Login</a>
+                        @endif
+                        @if (auth()->check() && auth()->user()->role === 'admin')
+                            <a href="{{ route('categories.index') }}" class="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10">Kategori</a>
+                        @endif
                     </div>
                     <div class="mt-8 flex flex-wrap gap-5 text-sm text-slate-200">
                         <div><span class="block text-2xl font-black text-white">5K+</span> Pelanggan</div>
@@ -85,7 +92,7 @@
                     <p class="text-sm font-bold uppercase tracking-[0.2em] text-red-500">Featured</p>
                     <h2 class="mt-2 text-3xl font-black text-slate-900">Produk Pilihan</h2>
                 </div>
-                <a href="{{ route('products.index') }}" class="hidden text-sm font-bold text-red-600 hover:text-red-700 sm:inline-flex">Lihat semua →</a>
+                <a href="{{ route('shop.products') }}" class="hidden text-sm font-bold text-red-600 hover:text-red-700 sm:inline-flex">Lihat semua →</a>
             </div>
 
             <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
@@ -101,6 +108,13 @@
                             <div class="mt-4 flex items-center justify-between">
                                 <span class="text-xl font-black text-slate-900">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
                                 <span class="rounded-full bg-red-50 px-2.5 py-1 text-xs font-bold text-red-600">{{ $product->stock }} stok</span>
+                            </div>
+                            <div class="mt-4 flex gap-2">
+                                <a href="{{ route('products.show', $product) }}" class="flex-1 rounded-xl border border-slate-200 px-3 py-2 text-center text-sm font-semibold text-slate-700 hover:border-slate-300 hover:bg-slate-50">Detail</a>
+                                <form action="{{ route('cart.add', $product) }}" method="POST" class="flex-1">
+                                    @csrf
+                                    <button type="submit" class="w-full rounded-xl bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-lg shadow-red-200 transition hover:bg-red-700">Keranjang</button>
+                                </form>
                             </div>
                         </div>
                     </article>

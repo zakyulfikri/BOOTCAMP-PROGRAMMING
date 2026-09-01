@@ -17,12 +17,12 @@ class ShopController extends Controller
         return view('home2', compact('featuredProducts', 'categories'));
     }
 
-    // Daftar Produk
+    // Daftar Produk untuk user
     public function products()
     {
         $products = Products::with('category')->latest()->paginate(12);
 
-        return view('products.index', compact('products'));
+        return view('shop.products', compact('products'));
     }
 
     // Halaman Keranjang

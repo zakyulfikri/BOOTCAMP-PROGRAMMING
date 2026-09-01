@@ -1,16 +1,34 @@
+@php
+    $isAdmin = auth()->check() && auth()->user()->role === 'admin';
+@endphp
+
 <nav x-data="{ open: false }" class="sticky top-0 z-50 border-b border-red-100 bg-white/80 shadow-[0_10px_30px_rgba(15,23,42,0.05)] backdrop-blur-xl">
     <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        <a href="{{ route('dashboard') }}" class="inline-flex items-center gap-2 text-2xl font-black tracking-tight text-slate-900">
+        <a href="{{ $isAdmin ? route('dashboard') : route('home') }}" class="inline-flex items-center gap-2 text-2xl font-black tracking-tight text-slate-900">
             <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-red-500 to-orange-400 text-lg text-white shadow-lg shadow-red-200">Z</span>
             <span>Z <span class="text-red-500">Shop</span></span>
         </a>
 
         <div class="hidden items-center gap-2 md:flex">
-            @auth
+            @if ($isAdmin)
                 <a href="{{ route('dashboard') }}" class="rounded-xl px-4 py-2 text-sm font-semibold transition {{ request()->routeIs('dashboard') ? 'bg-gradient-to-r from-red-500 to-orange-400 text-white shadow-lg shadow-red-200' : 'text-slate-700 hover:bg-red-50 hover:text-red-600' }}">Dashboard</a>
-            @endauth
-            <a href="{{ route('categories.index') }}" class="rounded-xl px-4 py-2 text-sm font-semibold transition {{ request()->routeIs('categories.*') ? 'bg-gradient-to-r from-red-500 to-orange-400 text-white shadow-lg shadow-red-200' : 'text-slate-700 hover:bg-red-50 hover:text-red-600' }}">Kategori</a>
-            <a href="{{ route('products.index') }}" class="rounded-xl px-4 py-2 text-sm font-semibold transition {{ request()->routeIs('products.*') ? 'bg-gradient-to-r from-red-500 to-orange-400 text-white shadow-lg shadow-red-200' : 'text-slate-700 hover:bg-red-50 hover:text-red-600' }}">Produk</a>
+                <a href="{{ route('categories.index') }}" class="rounded-xl px-4 py-2 text-sm font-semibold transition {{ request()->routeIs('categories.*') ? 'bg-gradient-to-r from-red-500 to-orange-400 text-white shadow-lg shadow-red-200' : 'text-slate-700 hover:bg-red-50 hover:text-red-600' }}">Kategori</a>
+                <a href="{{ route('products.index') }}" class="rounded-xl px-4 py-2 text-sm font-semibold transition {{ request()->routeIs('products.*') ? 'bg-gradient-to-r from-red-500 to-orange-400 text-white shadow-lg shadow-red-200' : 'text-slate-700 hover:bg-red-50 hover:text-red-600' }}">Produk</a>
+            @else
+                <a href="{{ route('shop.products') }}" class="rounded-xl px-4 py-2 text-sm font-semibold transition {{ request()->routeIs('shop.products') ? 'bg-gradient-to-r from-red-500 to-orange-400 text-white shadow-lg shadow-red-200' : 'text-slate-700 hover:bg-red-50 hover:text-red-600' }}">Produk</a>
+            @endif
+
+            <a href="{{ route('cart.index') }}" class="rounded-xl bg-red-50 px-4 py-2 text-sm font-semibold text-red-600 transition hover:bg-red-100">
+                Keranjang
+                <span class="ml-1 inline-flex min-w-6 items-center justify-center rounded-full bg-red-600 px-1.5 py-0.5 text-[10px] font-bold text-white">
+                    {{ collect(session('cart', []))->sum('quantity') }}
+                </span>
+            </a>
+
+            @guest
+                <a href="{{ route('login') }}" class="rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-red-300 hover:bg-red-50 hover:text-red-600">Login</a>
+            @endguest
+
             @auth
                 <form method="POST" action="{{ route('logout') }}" class="ml-2">@csrf<button type="submit" class="rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-red-300 hover:bg-red-50 hover:text-red-600">Keluar</button></form>
             @endauth
@@ -22,9 +40,20 @@
     </div>
     <div x-show="open" x-transition class="border-t border-slate-200 bg-white/90 px-4 pb-4 md:hidden">
         <div class="mx-auto max-w-7xl space-y-1 pt-3">
-            @auth<a href="{{ route('dashboard') }}" class="block rounded-xl px-4 py-3 font-semibold text-slate-700 hover:bg-red-50 hover:text-red-600">Dashboard</a>@endauth
-            <a href="{{ route('categories.index') }}" class="block rounded-xl px-4 py-3 font-semibold text-slate-700 hover:bg-red-50 hover:text-red-600">Kategori</a>
-            <a href="{{ route('products.index') }}" class="block rounded-xl px-4 py-3 font-semibold text-slate-700 hover:bg-red-50 hover:text-red-600">Produk</a>
+            @if ($isAdmin)
+                <a href="{{ route('dashboard') }}" class="block rounded-xl px-4 py-3 font-semibold text-slate-700 hover:bg-red-50 hover:text-red-600">Dashboard</a>
+                <a href="{{ route('categories.index') }}" class="block rounded-xl px-4 py-3 font-semibold text-slate-700 hover:bg-red-50 hover:text-red-600">Kategori</a>
+                <a href="{{ route('products.index') }}" class="block rounded-xl px-4 py-3 font-semibold text-slate-700 hover:bg-red-50 hover:text-red-600">Produk</a>
+            @else
+                <a href="{{ route('shop.products') }}" class="block rounded-xl px-4 py-3 font-semibold text-slate-700 hover:bg-red-50 hover:text-red-600">Produk</a>
+            @endif
+            <a href="{{ route('cart.index') }}" class="block rounded-xl px-4 py-3 font-semibold text-slate-700 hover:bg-red-50 hover:text-red-600">Keranjang</a>
+            @guest
+                <a href="{{ route('login') }}" class="block rounded-xl px-4 py-3 font-semibold text-slate-700 hover:bg-red-50 hover:text-red-600">Login</a>
+            @endguest
+            @auth
+                <form method="POST" action="{{ route('logout') }}" class="pt-1">@csrf<button type="submit" class="block w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-left font-semibold text-slate-700 hover:border-red-300 hover:bg-red-50 hover:text-red-600">Keluar</button></form>
+            @endauth
         </div>
     </div>
 </nav>

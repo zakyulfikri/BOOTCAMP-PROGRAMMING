@@ -65,6 +65,10 @@ it('shows dashboard summary statistics', function () {
     $response = $this->actingAs($user)->get('/dashboard');
 
     $response->assertOk();
+    $response->assertViewHas('stats');
+    $response->assertViewHas('categoryChart');
+    $response->assertViewHas('weeklyOrders');
+    $response->assertViewHas('recentOrders');
     $response->assertSeeText('Jumlah Produk');
     $response->assertSeeText('2');
     $response->assertSeeText('Jumlah Kategori Produk');
@@ -73,4 +77,6 @@ it('shows dashboard summary statistics', function () {
     $response->assertSeeText('60');
     $response->assertSeeText('Jumlah Order');
     $response->assertSeeText('2');
+    $response->assertSeeText('ORD-001');
+    $response->assertSeeText('ORD-002');
 });
