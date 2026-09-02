@@ -105,6 +105,14 @@ class CartController extends Controller
 
         $totalAmount = collect($cart)->sum(fn ($item) => $item['price'] * $item['quantity']);
 
+        foreach ($cart as $item) {
+            $product = Products::find($item['product_id']);
+
+            if ($product === null || $product->stock < $item['quantity']) {
+                return redirect()->route('checkout.page')->with('error', 'Stok produk tidak mencukupi.');
+            }
+        }
+
         $order = Order::create([
             'order_number' => 'ORD-'.strtoupper(bin2hex(random_bytes(4))),
             'customer_name' => $request->customer_name,
@@ -123,10 +131,33 @@ class CartController extends Controller
                 'quantity' => $item['quantity'],
                 'price' => $item['price'],
             ]);
+
+            Products::whereKey($item['product_id'])->decrement('stock', $item['quantity']);
         }
 
         session()->forget('cart');
 
-        return redirect()->route('home')->with('success', 'Checkout berhasil. Pesanan Anda sedang diproses.');
+        $whatsappNumber = preg_replace('/\D+/', '', (string) config('services.whatsapp.number'));
+
+        if (str_starts_with($whatsappNumber, '0')) {
+            $whatsappNumber = '62'.substr($whatsappNumber, 1);
+        }
+
+        $message = implode("\n", [
+            'Halo, saya ingin mengonfirmasi pesanan.',
+            '',
+            'Nomor pesanan: '.$order->order_number,
+            'Nama: '.$order->customer_name,
+            'Total: Rp '.number_format($order->total_amount, 0, ',', '.'),
+            'Metode pembayaran: '.$order->payment_method,
+        ]);
+
+        if ($whatsappNumber === '') {
+            return redirect()->route('home')->with('success', 'Checkout berhasil. Pesanan Anda sedang diproses.');
+        }
+
+        $order->update(['status' => 'completed']);
+
+        return redirect()->away('https://wa.me/'.$whatsappNumber.'?text='.rawurlencode($message));
     }
 }

@@ -66,7 +66,7 @@ it('shows dashboard summary statistics', function () {
 
     $response->assertOk();
     $response->assertViewHas('stats');
-    $response->assertViewHas('categoryChart');
+    $response->assertViewHas('productChart');
     $response->assertViewHas('weeklyOrders');
     $response->assertViewHas('recentOrders');
     $response->assertSeeText('Jumlah Produk');
@@ -75,6 +75,8 @@ it('shows dashboard summary statistics', function () {
     $response->assertSeeText('2');
     $response->assertSeeText('Jumlah Klik Produk');
     $response->assertSeeText('60');
+    $response->assertSeeText('Laptop');
+    $response->assertSeeText('42 klik');
     $response->assertSeeText('Jumlah Order');
     $response->assertSeeText('2');
     $response->assertSeeText('ORD-001');

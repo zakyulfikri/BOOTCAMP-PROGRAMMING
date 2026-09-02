@@ -45,6 +45,7 @@ class ProductsController extends Controller
      */
     public function show(Products $product)
     {
+        $product->increment('click_count');
         $product->load('category');
 
         return view('products.show', compact('product'));

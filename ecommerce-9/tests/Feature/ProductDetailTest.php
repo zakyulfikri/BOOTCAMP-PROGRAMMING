@@ -26,4 +26,8 @@ it('shows the product detail page', function () {
     $response->assertSeeText('Laptop Gaming');
     $response->assertSeeText('Laptop untuk gaming dan kerja');
     $response->assertSeeText('Rp 15.000.000');
+    $this->assertDatabaseHas('products', [
+        'id' => $product->id,
+        'click_count' => 21,
+    ]);
 });

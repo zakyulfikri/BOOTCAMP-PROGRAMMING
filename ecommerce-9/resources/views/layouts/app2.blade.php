@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Z Shop - @yield('title', 'E-Commerce')</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    @vite(['resources/js/app.js'])
     <style>
         body {
             background:
@@ -22,6 +23,10 @@
 
         .soft-shadow {
             box-shadow: 0 14px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        [x-cloak] {
+            display: none !important;
         }
     </style>
 </head>

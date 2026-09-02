@@ -19,7 +19,7 @@ Route::post('/checkout', [CartController::class, 'checkout'])->middleware('auth'
 
 Route::get('/shop/products', [ShopController::class, 'products'])->name('shop.products');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
 

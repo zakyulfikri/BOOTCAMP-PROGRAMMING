@@ -16,8 +16,8 @@ class DashboardController extends Controller
         $totalProductClicks = Products::sum('click_count') ?? 0;
         $totalOrders = Order::count();
 
-        $categoryChart = ProductCategory::withCount('products')->get();
-        $maxCategoryProducts = $categoryChart->max('products_count') ?: 1;
+        $productChart = Products::orderByDesc('click_count')->take(5)->get();
+        $maxProductClicks = $productChart->max('click_count') ?: 1;
 
         $weeklyOrders = collect();
         for ($i = 5; $i >= 0; $i--) {
@@ -43,9 +43,9 @@ class DashboardController extends Controller
 
         return view('dashboard', compact(
             'stats',
-            'categoryChart',
+            'productChart',
             'weeklyOrders',
-            'maxCategoryProducts',
+            'maxProductClicks',
             'maxWeeklyOrder',
             'recentOrders'
         ));

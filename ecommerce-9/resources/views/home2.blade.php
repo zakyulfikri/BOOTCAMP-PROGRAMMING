@@ -14,9 +14,7 @@
                     </p>
                     <div class="mt-8 flex flex-col gap-3 sm:flex-row">
                         <a href="{{ route('shop.products') }}" class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-bold text-slate-900 transition hover:bg-red-50">Lihat Produk</a>
-                        @if (auth()->check())
-                            <a href="{{ route('dashboard') }}" class="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10">Dashboard</a>
-                        @else
+                        @if (! auth()->check())
                             <a href="{{ route('login') }}" class="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3 text-sm font-bold text-white transition hover:bg-white/10">Login</a>
                         @endif
                         @if (auth()->check() && auth()->user()->role === 'admin')

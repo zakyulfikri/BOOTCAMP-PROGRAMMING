@@ -14,6 +14,18 @@ test('non admin user cannot access admin routes', function () {
     $response->assertForbidden();
 });
 
+test('non admin user cannot access the dashboard', function () {
+    $user = User::factory()->create([
+        'role' => 'user',
+    ]);
+
+    $response = $this
+        ->actingAs($user)
+        ->get('/dashboard');
+
+    $response->assertForbidden();
+});
+
 test('admin user can access admin routes', function () {
     $user = User::factory()->create([
         'role' => 'admin',

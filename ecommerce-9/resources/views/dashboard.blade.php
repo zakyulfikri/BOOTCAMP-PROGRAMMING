@@ -49,27 +49,27 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-400">Performance</p>
-                        <h3 class="mt-1 text-xl font-bold text-slate-900">Distribusi Kategori</h3>
+                        <h3 class="mt-1 text-xl font-bold text-slate-900">Distribusi Produk</h3>
                     </div>
                     <span class="rounded-full bg-red-100 px-3 py-1 text-xs font-semibold text-red-700">Diagram</span>
                 </div>
 
                 <div class="mt-6 space-y-5">
-                    @forelse ($categoryChart as $category)
+                    @forelse ($productChart as $product)
                         @php
-                            $percentage = ($category->products_count / $maxCategoryProducts) * 100;
+                            $percentage = ($product->click_count / $maxProductClicks) * 100;
                         @endphp
                         <div>
                             <div class="mb-1.5 flex items-center justify-between text-sm">
-                                <span class="font-semibold text-slate-700">{{ $category->name }}</span>
-                                <span class="font-bold text-slate-900">{{ $category->products_count }}</span>
+                                <span class="font-semibold text-slate-700">{{ $product->name }}</span>
+                                <span class="font-bold text-slate-900">{{ $product->click_count }} klik</span>
                             </div>
                             <div class="h-2.5 overflow-hidden rounded-full bg-slate-100">
                                 <div class="h-full rounded-full bg-gradient-to-r from-red-500 to-orange-400" style="width: {{ $percentage }}%"></div>
                             </div>
                         </div>
                     @empty
-                        <p class="text-sm text-slate-500">Belum ada data kategori produk.</p>
+                        <p class="text-sm text-slate-500">Belum ada data produk.</p>
                     @endforelse
                 </div>
             </div>
@@ -87,7 +87,7 @@
                         Produk dengan klik paling tinggi bisa dijadikan fokus promosi utama.
                     </div>
                     <div class="rounded-xl border-l-4 border-amber-500 bg-amber-50 p-3 text-sm text-slate-700">
-                        Kategori produk masih perlu didorong agar penjualan lebih merata.
+                        Produk dengan performa rendah masih perlu didorong agar lebih dikenal pelanggan.
                     </div>
                     <div class="rounded-xl border-l-4 border-emerald-500 bg-emerald-50 p-3 text-sm text-slate-700">
                         Order aktif menunjukkan toko Anda sedang berjalan dengan cukup baik.
